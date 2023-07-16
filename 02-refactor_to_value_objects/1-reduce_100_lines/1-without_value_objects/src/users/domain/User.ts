@@ -6,12 +6,12 @@ import { UserEmail } from "./UserEmail";
 export class User {
 	constructor(public id: string, public email: string, public birthdate: Date) {
 		this.ensureIdIsValid(id);
-		this.ensureEmailIsValid(email);
+		UserEmail.ensureEmailIsValid(email);
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
 	updateEmail(newEmail: string): void {
-		this.ensureEmailIsValid(newEmail);
+		UserEmail.ensureEmailIsValid(newEmail);
 		this.email = newEmail;
 	}
 
@@ -19,10 +19,6 @@ export class User {
 		if (!validate(id)) {
 			throw new InvalidArgumentError(`<${id}> is not a valid UUID`);
 		}
-	}
-
-	private ensureEmailIsValid(email: string): void {
-		UserEmail.ensureEmailIsValid(email);
 	}
 
 	private ensureBirthdateIsValid(birthdate: Date): void {
