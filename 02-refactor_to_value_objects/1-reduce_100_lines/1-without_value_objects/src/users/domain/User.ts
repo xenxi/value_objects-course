@@ -4,15 +4,15 @@ import { InvalidArgumentError } from "../../shared/domain/InvalidArgumentError";
 import { UserEmail } from "./UserEmail";
 
 export class User {
-	constructor(public id: string, public email: string, public birthdate: Date) {
+	private email: UserEmail;
+	constructor(public id: string, email: string, public birthdate: Date) {
 		this.ensureIdIsValid(id);
-		UserEmail.ensureEmailIsValid(email);
+		this.email = new UserEmail(email);
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
 	updateEmail(newEmail: string): void {
-		UserEmail.ensureEmailIsValid(newEmail);
-		this.email = newEmail;
+		this.email = new UserEmail(newEmail);
 	}
 
 	private ensureIdIsValid(id: string): void {
