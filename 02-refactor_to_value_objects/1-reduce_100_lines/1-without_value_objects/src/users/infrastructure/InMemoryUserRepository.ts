@@ -9,6 +9,6 @@ export class InMemoryUserRepository implements UserRepository {
 	}
 
 	search(userEmail: string): User | null {
-		return this.users.find((user) => user.email === userEmail) ?? null;
+		return this.users.find((user) => user.userEmail === userEmail) ?? null;
 	}
 }

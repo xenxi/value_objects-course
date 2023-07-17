@@ -4,14 +4,19 @@ import { UserId } from "./UserId";
 
 export class User {
 	private email: UserEmail;
-	constructor(public id: string, email: string, public birthdate: Date) {
-		UserId.ensureIdIsValid(id);
+	private readonly id: UserId;
+	constructor(id: string, email: string, public birthdate: Date) {
+		this.id = new UserId(id);
 		this.email = new UserEmail(email);
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
 	updateEmail(newEmail: string): void {
 		this.email = new UserEmail(newEmail);
+	}
+
+	get userEmail(): string {
+		return this.email.value;
 	}
 
 	private ensureBirthdateIsValid(birthdate: Date): void {
