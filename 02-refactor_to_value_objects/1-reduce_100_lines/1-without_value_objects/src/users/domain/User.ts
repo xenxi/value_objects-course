@@ -1,24 +1,17 @@
-import { validate } from "uuid";
-
 import { InvalidArgumentError } from "../../shared/domain/InvalidArgumentError";
 import { UserEmail } from "./UserEmail";
+import { UserId } from "./UserId";
 
 export class User {
 	private email: UserEmail;
 	constructor(public id: string, email: string, public birthdate: Date) {
-		this.ensureIdIsValid(id);
+		UserId.ensureIdIsValid(id);
 		this.email = new UserEmail(email);
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
 	updateEmail(newEmail: string): void {
 		this.email = new UserEmail(newEmail);
-	}
-
-	private ensureIdIsValid(id: string): void {
-		if (!validate(id)) {
-			throw new InvalidArgumentError(`<${id}> is not a valid UUID`);
-		}
 	}
 
 	private ensureBirthdateIsValid(birthdate: Date): void {
