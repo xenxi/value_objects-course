@@ -7,7 +7,7 @@ export class UserId {
 		this.ensureIdIsValid();
 	}
 
-	public ensureIdIsValid(): void {
+	private ensureIdIsValid(): void {
 		if (!validate(this.value)) {
 			throw new InvalidArgumentError(`<${this.value}> is not a valid UUID`);
 		}
