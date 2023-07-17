@@ -7,7 +7,7 @@ export class UserEmailUpdater {
 
 	update(oldEmail: string, newEmail: string): void {
 		const validOldEmail = new UserEmail(oldEmail);
-		const user = this.repository.search(validOldEmail.email);
+		const user = this.repository.search(validOldEmail.value);
 
 		if (!user) {
 			throw new UserDoesNotExistError(oldEmail);
