@@ -11,7 +11,7 @@ export class User {
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
-	updateEmail(newEmail: string): void {
+	set email(newEmail: string) {
 		this._email = new UserEmail(newEmail);
 	}
 

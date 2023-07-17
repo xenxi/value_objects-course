@@ -13,7 +13,7 @@ export class UserEmailUpdater {
 			throw new UserDoesNotExistError(oldEmail);
 		}
 
-		user.updateEmail(newEmail);
+		user.email = newEmail;
 		this.repository.save(user);
 	}
 }
