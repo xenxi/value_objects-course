@@ -1,20 +1,24 @@
 import { InvalidArgumentError } from "../../shared/domain/InvalidArgumentError";
 
 export class UserBirthdate {
-	public static ensureBirthdateIsValid(birthdate: Date): void {
+	constructor(public readonly value: Date) {
+		this.ensureBirthdateIsValid();
+	}
+
+	private ensureBirthdateIsValid(): void {
 		const currentDate = new Date();
-		let ageInYears = currentDate.getFullYear() - birthdate.getFullYear();
+		let ageInYears = currentDate.getFullYear() - this.value.getFullYear();
 
 		if (
-			currentDate.getMonth() < birthdate.getMonth() ||
-			(currentDate.getMonth() === birthdate.getMonth() &&
-				currentDate.getDate() < birthdate.getDate())
+			currentDate.getMonth() < this.value.getMonth() ||
+			(currentDate.getMonth() === this.value.getMonth() &&
+				currentDate.getDate() < this.value.getDate())
 		) {
 			ageInYears--;
 		}
 
 		if (ageInYears < 18 || ageInYears > 110) {
-			throw new InvalidArgumentError(`<${birthdate.toISOString()}> is not a valid birthdate`);
+			throw new InvalidArgumentError(`<${this.value.toISOString()}> is not a valid birthdate`);
 		}
 	}
 }
