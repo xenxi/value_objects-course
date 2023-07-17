@@ -3,20 +3,20 @@ import { UserEmail } from "./UserEmail";
 import { UserId } from "./UserId";
 
 export class User {
-	private email: UserEmail;
-	private readonly id: UserId;
+	private _email: UserEmail;
+	private readonly _id: UserId;
 	constructor(id: string, email: string, public birthdate: Date) {
-		this.id = new UserId(id);
-		this.email = new UserEmail(email);
+		this._id = new UserId(id);
+		this._email = new UserEmail(email);
 		this.ensureBirthdateIsValid(birthdate);
 	}
 
 	updateEmail(newEmail: string): void {
-		this.email = new UserEmail(newEmail);
+		this._email = new UserEmail(newEmail);
 	}
 
-	get userEmail(): string {
-		return this.email.value;
+	get email(): string {
+		return this._email.value;
 	}
 
 	private ensureBirthdateIsValid(birthdate: Date): void {
